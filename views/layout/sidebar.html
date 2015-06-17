@@ -1,0 +1,32 @@
+<!-- #NAVIGATION -->
+<!-- Left panel : Navigation area -->
+<aside id="left-panel">
+
+	<!-- User info -->
+	<div class="login-info">
+		<span> <!-- User image size is adjusted inside CSS, it should stay as it --> 
+			
+			<a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
+				<img src="{{user.imgUri}}" alt="me" class="online" /> 
+				<span>
+					{{user.firstname}}.{{user.lastname}}
+				</span>
+			</a> 
+			
+		</span>
+	</div>
+	<!-- end user info -->
+	<nav>
+
+		<ul>
+			<li ng-repeat="item in menu"  ng-class="{'active': item.active}">
+				<a href="{{item.name}}" title="{{item.name}}"><i class="fa fa-lg fa-fw {{item.fa_icon}}"></i> <span class="menu-item-parent">{{item.name}}</span></a>
+			</li>
+		</ul>
+	</nav>
+	<span class="minifyme" data-action="minifyMenu"> 
+		<i class="fa fa-arrow-circle-left hit"></i> 
+	</span>
+
+</aside>
+<!-- END NAVIGATION -->

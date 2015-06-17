@@ -1,0 +1,83 @@
+<header id="header">
+	<div id="logo-group">
+		<!-- PLACE YOUR LOGO HERE -->
+		<span id="logo"> <img src="https://app.abtasty.com/interface/img/logo_2014.png" alt="ABTasty"> </span>
+		<!-- END LOGO PLACEHOLDER -->
+		<span id="activity" style="cursor:default !important;"> <i class="fa fa-newspaper-o"></i> <b class="badge" ng-if="haveNews"> {{news.length}} </b> </span>
+	</div>
+
+	<!-- #PROJECTS: projects dropdown -->
+	<div class="project-context hidden-xs">
+
+		<span class="label">{{translateWords.topicality}}:</span>
+		<span class="project-selector dropdown-toggle" data-toggle="dropdown" ng-if="haveNews">{{translateWords.latestNews}} <i class="fa fa-angle-down"></i></span>
+		<span class="project-selector" ng-if="!haveNews">{{translateWords.noNews}}</span>
+
+		<!-- Suggestion: populate this list with fetch and push technique -->
+		<ul class="dropdown-menu">
+			<li ng-repeat="item in news">
+				<a href="javascript:void(0);">{{item.title}}</a>
+			</li>
+			<li class="divider"></li>
+			<li>
+				<a href="javascript:void(0);"><i class="fa fa-power-off"></i> {{translateWords.clear}}</a>
+			</li>
+		</ul>
+		<!-- end dropdown-menu-->
+
+	</div>
+	<!-- end projects dropdown -->
+
+	<!-- #TOGGLE LAYOUT BUTTONS -->
+	<!-- pulled right: nav area -->
+	<div class="pull-right">
+		
+		<!-- collapse menu button -->
+		<div id="hide-menu" class="btn-header pull-right">
+			<span> <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu"><i class="fa fa-reorder"></i></a> </span>
+		</div>
+		<!-- end collapse menu -->
+
+		<!-- logout button -->
+		<div id="logout" class="btn-header transparent pull-right">
+			<span> <a href="login.html" title="Sign Out" data-action="userLogout" data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i class="fa fa-sign-out"></i></a> </span>
+		</div>
+		<!-- end logout button -->
+
+		<!-- search mobile button (this is hidden till mobile view port) -->
+		<div id="search-mobile" class="btn-header transparent pull-right">
+			<span> <a href="javascript:void(0)" title="Search"><i class="fa fa-search"></i></a> </span>
+		</div>
+		<!-- end search mobile button -->
+		
+		<!-- #SEARCH -->
+		<!-- input: search field -->
+		<form action="search.html" class="header-search pull-right">
+			<input id="search-fld" type="text" name="param" placeholder="Find ...">
+			<button type="submit">
+				<i class="fa fa-search"></i>
+			</button>
+			<a href="javascript:void(0);" id="cancel-search-js" title="Cancel Search"><i class="fa fa-times"></i></a>
+		</form>
+		<!-- end input: search field -->
+
+		<!-- multiple lang dropdown : find all flags in the flags page -->
+		<ul class="header-dropdown-list hidden-xs">
+			<li>
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown"  ng-repeat="item in languages | filter: { active: true}"> 
+					<img src="ressources/img/blank.gif" class="flag {{item.class}}" alt="{{item.country}}"> 
+					<span> {{item.name}} </span> <i class="fa fa-angle-down"></i> 
+				</a>
+				<ul class="dropdown-menu pull-right">
+					<li ng-repeat="item in languages" ng-class="{'active': item.active}">
+						<a href="javascript:void(0);"><img src="ressources/img/blank.gif" class="flag {{item.class}}" alt="{{item.country}}"> {{item.name}}</a>
+					</li>				
+				</ul>
+			</li>
+		</ul>
+		<!-- end multiple lang -->
+
+	</div>
+	<!-- end pulled right: nav area -->
+
+</header>
