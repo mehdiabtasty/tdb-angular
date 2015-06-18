@@ -22284,3 +22284,13 @@ body.menu-on-top.fixed-header.fixed-navigation.fixed-ribbon #ribbon {
     display: block !important;
   }
 }
+
+
+/*BRUT a RE-COMPILER*/
+.label-head-table{
+  margin-top: 8px;
+  margin-right: 4px;
+  margin-left: 4px;
+  cursor: pointer;
+}
+

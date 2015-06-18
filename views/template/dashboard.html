@@ -191,7 +191,6 @@
 	</div>
 
 	<!-- end row -->
-
 	<!-- row -->
 	<div class="row">
 
@@ -203,7 +202,11 @@
 				<header>
 					<span class="widget-icon"> <i class="fa fa-users"></i> </span>
 					<h2>&nbsp;Accounts</h2>				
-					
+					<span class="label label-default label-head-table pull-right" 
+							ng-repeat="col in tableCols | filter: { active: false }" 
+							ng-click="showCol(col.id)">
+							<i class="fa fa-plus-circle"></i> {{col.name | uppercase}}
+					</span>
 				</header>
 
 				<!-- widget div-->
@@ -218,58 +221,31 @@
 					
 					<!-- widget content -->
 					<div class="widget-body no-padding">
-						
+						<div class="dt-toolbar">
+							<div class="col-xs-12 col-sm-12">
+								<div class="dataTables_filter">
+									<label><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span> 
+									<input type="search" class="form-control" ng-model="query"></label>
+								</div>
+							</div>
+						</div>
 						<table id="datatable_col_reorder" class="table table-striped table-bordered table-hover table-responsive" width="100%">
 							<thead>
 								<tr>
-									<th>#</th>
-									<th>Name</th>
-									<th>Identifier</th>
-									<th>Pack</th>
-									<th>Quota</th>
-									<th>Quota PV</th>
-									<th>Quota start date</th>
-									<th>Quota valid until</th>
-									<th>Demo valid until</th>
-									<th>Quota winners</th>
-									<th>Tests Pending/All</th>
-									<th>Creation date</th>
-									<th>Update script</th>
-									<th>JS Local</th>
-									<th>JS Cloudfront</th>
-									<th>Status framework</th>
-									<th>Database</th>
-									<th>Account manager</th>
-									<th>Agencies</th>
-									<th>Stats</th>
-									<th>Support time</th>
-									<th>Exclude IE + meta tag</th>
+									<th ng-repeat="col in tableCols | filter: { active: true }">
+										{{col.name}} 
+										<span ng-show="hiddenLock(col.valueId)" class="pull-right">
+											<i class="fa fa-times" ng-click="hideCol(col.id)"></i>
+										</span>
+										<span ng-show="!hiddenLock(col.valueId)" class="pull-right">
+											<i class="fa fa-sort" ng-click="order(col.valueId, false)"></i>
+										</span>
+									</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="account in accounts">
-									<td>{{account.id}}</td>
-									<td>{{account.name}}</td>
-									<td>{{account.identifier}}</td>
-									<td>{{account.pack}}</td>
-									<td>{{account.quota}}</td>
-									<td>{{account.quotaPv}}</td>
-									<td>{{account.quotaStartDate}}</td>
-									<td>{{account.quotaValidUntil}}</td>
-									<td>{{account.demoValidUntil}}</td>
-									<td>{{account.quotaWinners}}</td>
-									<td>{{account.testsPending}}</td>
-									<td>{{account.creationDate}}</td>
-									<td>{{account.updateScript}}</td>
-									<td>{{account.jsLocal}}</td>
-									<td>{{account.jsCloudFront}}</td>
-									<td>{{account.statusFramework}}</td>
-									<td>{{account.database}}</td>
-									<td>{{account.accountManager}}</td>
-									<td>{{account.stats}}</td>
-									<td>{{account.agencies}}</td>
-									<td>{{account.supportTime}}</td>
-									<td>{{account.excludeIE}}</td>
+								<tr ng-repeat="account in accounts | filter : query" ng-init="accountIndex = $index">
+									<td ng-repeat="col in tableCols | filter: { active: true }">{{ colValue(col.id, accountIndex) }}</td>
 								</tr>
 							</tbody>
 						</table>
