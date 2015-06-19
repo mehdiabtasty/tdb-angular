@@ -3,8 +3,13 @@
 app
 	.controller('contentController' , function ($scope, $filter, dataProvider) {
 
-		$scope.tableCols = dataProvider.getTableCols();
-		$scope.accounts = dataProvider.getAccounts();
+		$scope.tableCols = dataProvider.getTableCols().then(function(tableCols){
+	      $scope.tableCols = tableCols;
+	    });
+
+		$scope.accounts = dataProvider.getAccounts().then(function(accounts){
+	      $scope.accounts = accounts;
+	    });
 
 		//colOrder
 		var orderBy = $filter('orderBy');

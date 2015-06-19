@@ -2,8 +2,12 @@
 
 app
 	.controller('configController' , function ($scope , $rootScope, dataProvider) {
-		$rootScope.options = dataProvider.getOptions();
-		$rootScope.translateWords = dataProvider.getTranslateWords();
+		$scope.optionsPage = dataProvider.getOptions().then(function(optionsPage){
+	      $rootScope.optionsPage = optionsPage;
+	    });
+		$scope.translateWords = dataProvider.getTranslateWords().then(function(translateWords){
+	      $rootScope.translateWords = translateWords;
+	    });
 
 	})
 ;
